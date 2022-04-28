@@ -9,10 +9,12 @@ class HomePage:
     side_menu_selector = "#hmenu-canvas"
     livres_menu_selector = "a[data-menu-id='10']"
     tous_les_livres = "ul.hmenu-visible li:nth-of-type(3)"
+    cookies = "#sp-cc-accept"
 
     def __init__(self, driver: webdriver):
         self.driver = driver
-
+    def closecookiepopup(self):
+        self.driver.find_element(By.CSS_SELECTOR, self.cookies).click()
     def openAllMenu(self):
         self.driver.find_element(By.CSS_SELECTOR, self.hamburguer_menu_selector).click()
         wait = WebDriverWait(self.driver, 3)
@@ -22,8 +24,8 @@ class HomePage:
         self.driver.find_element(By.CSS_SELECTOR, self.livres_menu_selector).click()
         wait = WebDriverWait(self.driver, 3)
         wait.until(expected_conditions.invisibility_of_element_located((By.CSS_SELECTOR, self.livres_menu_selector)))
+        wait.until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, self.tous_les_livres)))
 
     def openAllBooks(self):
-        wait = WebDriverWait(self.driver, 3)
-        wait.until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, self.tous_les_livres)))
         self.driver.find_element(By.CSS_SELECTOR, self.tous_les_livres).click()
+
