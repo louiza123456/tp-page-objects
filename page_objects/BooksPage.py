@@ -6,8 +6,8 @@ class BooksPage:
 
     first_book_selector = "div.a-section.octopus-pc-card-content li"
 
-    def init(self, driver: webdriver):
+    def __init__(self, driver ):
         self.driver = driver
 
     def SelectFirstBookNouveautes(self):
-        self.driver.find_elements(By.CSS_SELECTOR, self.first_book)[0].click()
+        self.driver.find_elements(By.CSS_SELECTOR, self.first_book_selector)[0].click()
